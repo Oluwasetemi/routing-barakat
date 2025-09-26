@@ -1,8 +1,8 @@
-import useSWR from 'swr'
+import { useQuery } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 
-// SWR error fallback component
-function SWRErrorFallback({ error, resetErrorBoundary }) {
+// TanstackQuery error fallback component
+function TanstackQueryErrorFallback({ error, resetErrorBoundary }) {
   return (
     <div
       style={{
@@ -15,10 +15,10 @@ function SWRErrorFallback({ error, resetErrorBoundary }) {
       }}
     >
       <h3 style={{ color: '#dc2626', marginBottom: '15px' }}>
-        🔴 Failed to Load Posts (SWR)
+        🔴 Failed to Load Posts (Tanstack Query)
       </h3>
       <p style={{ marginBottom: '15px', color: '#6b7280' }}>
-        There was an error loading the posts data using SWR.
+        There was an error loading the posts data.
       </p>
       <details style={{ marginBottom: '15px', textAlign: 'left' }}>
         <summary style={{ cursor: 'pointer', color: '#374151' }}>
@@ -53,18 +53,27 @@ function SWRErrorFallback({ error, resetErrorBoundary }) {
   )
 }
 
-function SWRComponent() {
-  const fetcher = (url) => fetch(url).then((res) => res.json()).catch((err) => {
-    console.error(err)
-    return null
-  })
-  const { data, isLoading, error } = useSWR('https://jsonplaceholder.typicode.com/posts', fetcher)
+function TanstackQuery() {
 
-  if (isLoading) return <div>Loading...</div>
+  const fetchPosts = async () => {
+    // can use fetch or axios or any other library to fetch data
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+    if (!response.ok) throw new Error('Network response was not ok')
+
+    return response.json()
+  }
+
+  const result = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+  })
+  const { data, isPending, error } = result
+
+  if (isPending) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
 
   return (
-    <ErrorBoundary FallbackComponent={SWRErrorFallback}>
+    <ErrorBoundary FallbackComponent={TanstackQueryErrorFallback}>
       <div>
         <h1>Posts</h1>
         {data.map((post) => (
@@ -78,4 +87,4 @@ function SWRComponent() {
   )
 }
 
-export default SWRComponent
+export default TanstackQuery

@@ -3,6 +3,7 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 
 // setup routes
 import { Routes, Route, Link, NavLink, useParams } from 'react-router-dom'
+import { ErrorBoundary } from 'react-error-boundary'
 import Home from './pages/home'
 import Tanstack from './pages/tanstack'
 import SWRPage from './pages/swr'
@@ -10,12 +11,66 @@ import SWRPage from './pages/swr'
 const Lazy = lazy(() => import('./components/lazy'))
 const User = lazy(() => import('./components/user'))
 
+// Route-level error fallback component
+function RouteErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div
+      style={{
+        padding: '30px',
+        textAlign: 'center',
+        border: '2px solid #fca5a5',
+        borderRadius: '8px',
+        backgroundColor: '#fef2f2',
+        maxWidth: '500px',
+        margin: '20px auto'
+      }}
+    >
+      <h3 style={{ color: '#dc2626', marginBottom: '15px' }}>
+        ⚠️ Page Error
+      </h3>
+      <p style={{ marginBottom: '15px', color: '#6b7280' }}>
+        This page encountered an error and couldn't load properly.
+      </p>
+      <details style={{ marginBottom: '15px', textAlign: 'left' }}>
+        <summary style={{ cursor: 'pointer', color: '#374151' }}>
+          Error Details
+        </summary>
+        <pre style={{
+          background: '#f3f4f6',
+          padding: '8px',
+          borderRadius: '4px',
+          overflow: 'auto',
+          fontSize: '12px',
+          color: '#dc2626'
+        }}>
+          {error.message}
+        </pre>
+      </details>
+      <button
+        onClick={resetErrorBoundary}
+        style={{
+          background: '#3b82f6',
+          color: 'white',
+          border: 'none',
+          padding: '8px 16px',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '14px'
+        }}
+      >
+        Reload Page
+      </button>
+    </div>
+  )
+}
+
 function App() {
-  const [data, setData] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [_data, setData] = useState(null)
+  const [_isLoading, setIsLoading] = useState(false)
+  const [_error, setError] = useState(null)
 
   useEffect(function fetchData() {
+    // do not use useEffect to fetch data (prefer @tanstack/react-query or swr)
     setIsLoading(true)
     fetch(`https://jsonplaceholder.typicode.com/posts`)
       .then((res) => res.json())
@@ -39,38 +94,40 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <ErrorBoundary FallbackComponent={RouteErrorFallback}>
+        <Suspense fallback={<div>Loading...</div>}>
 
-        {/* navigation */}
-        <nav style={{ display: 'inline-flex', gap: '10px' }}>
-          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/">Home</NavLink>{` `}
-          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/posts">Posts</NavLink>{` `}
-          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/users">Users</NavLink>{` `}
-          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/lazy">Lazy</NavLink>{` `}
-          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/tanstack">Tanstack</NavLink>{` `}
-          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/swr">SWR</NavLink>{` `}
-        </nav>
+          {/* navigation */}
+          <nav style={{ display: 'inline-flex', gap: '10px' }}>
+            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/">Home</NavLink>{` `}
+            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/posts">Posts</NavLink>{` `}
+            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/users">Users</NavLink>{` `}
+            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/lazy">Lazy</NavLink>{` `}
+            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/tanstack">Tanstack</NavLink>{` `}
+            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/swr">SWR</NavLink>{` `}
+          </nav>
 
-        {/* routes */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/:id" element={<Post />} />
+          {/* routes */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/posts" element={<Posts />} />
+            <Route path="/posts/:id" element={<Post />} />
 
-          {/* user routes */}
-          {/* /users, users/:id */}
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:id" element={<User />} />
+            {/* user routes */}
+            {/* /users, users/:id */}
+            <Route path="/users" element={<Users />} />
+            <Route path="/users/:id" element={<User />} />
 
-          {/* tanstack routes */}
-          <Route path="/tanstack" element={<Tanstack />} />
-          <Route path="/swr" element={<SWRPage />} />
+            {/* tanstack routes */}
+            <Route path="/tanstack" element={<Tanstack />} />
+            <Route path="/swr" element={<SWRPage />} />
 
-          {/* lazy loading routes */}
-          <Route path="/lazy" element={<Lazy />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+            {/* lazy loading routes */}
+            <Route path="/lazy" element={<Lazy />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </>
   )
 }
@@ -102,7 +159,70 @@ function Post() {
 }
 
 function NotFound() {
-  return <div>NotFound</div>
+  return (
+    <div style={{
+      padding: '40px',
+      textAlign: 'center',
+      fontFamily: 'system-ui, sans-serif',
+      maxWidth: '600px',
+      margin: '0 auto',
+      marginTop: '100px'
+    }}>
+      <h1 style={{
+        fontSize: '4rem',
+        color: '#6b7280',
+        marginBottom: '20px',
+        fontWeight: 'bold'
+      }}>
+        404
+      </h1>
+      <h2 style={{
+        color: '#374151',
+        marginBottom: '20px',
+        fontSize: '1.5rem'
+      }}>
+        Page Not Found
+      </h2>
+      <p style={{
+        color: '#6b7280',
+        marginBottom: '30px',
+        fontSize: '1.1rem'
+      }}>
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <NavLink
+          to="/"
+          style={{
+            background: '#3b82f6',
+            color: 'white',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontSize: '16px',
+            fontWeight: '500'
+          }}
+        >
+          Go Home
+        </NavLink>
+        <button
+          onClick={() => window.history.back()}
+          style={{
+            background: '#6b7280',
+            color: 'white',
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '16px',
+            fontWeight: '500'
+          }}
+        >
+          Go Back
+        </button>
+      </div>
+    </div>
+  )
 }
 
 function Users() {
@@ -116,10 +236,5 @@ function Users() {
   )
 }
 
-
-// ErrorBoundaries (react-error-boundary)
-// function ErrorBoundary({ children }) {
-//   return <ErrorBoundary>{children}</ErrorBoundary>
-// }
 
 export default App
