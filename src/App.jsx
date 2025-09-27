@@ -7,8 +7,14 @@ import { ErrorBoundary } from 'react-error-boundary'
 import Home from './pages/home'
 import Tanstack from './pages/tanstack'
 import SWRPage from './pages/swr'
+import ErrorTestPage from './pages/error-test'
 
-const Lazy = lazy(() => import('./components/lazy'))
+// Fake async operation to make Suspense show for longer
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
+const Lazy = lazy(() =>
+  delay(3000).then(() => import('./components/lazy'))
+)
 const User = lazy(() => import('./components/user'))
 
 // Route-level error fallback component
@@ -95,38 +101,47 @@ function App() {
   return (
     <>
       <ErrorBoundary FallbackComponent={RouteErrorFallback}>
-        <Suspense fallback={<div>Loading...</div>}>
+        {/* navigation */}
+        <nav style={{ display: 'inline-flex', gap: '10px' }}>
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/">Home</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/posts">Posts</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/users">Users</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/lazy">Lazy</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/tanstack">Tanstack</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/swr">SWR</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/error-test">Error Test</NavLink>{` `}
+        </nav>
 
-          {/* navigation */}
-          <nav style={{ display: 'inline-flex', gap: '10px' }}>
-            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/">Home</NavLink>{` `}
-            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/posts">Posts</NavLink>{` `}
-            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/users">Users</NavLink>{` `}
-            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/lazy">Lazy</NavLink>{` `}
-            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/tanstack">Tanstack</NavLink>{` `}
-            <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/swr">SWR</NavLink>{` `}
-          </nav>
+        {/* routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:id" element={<Post />} />
 
-          {/* routes */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/posts" element={<Posts />} />
-            <Route path="/posts/:id" element={<Post />} />
+          {/* user routes */}
+          {/* /users, users/:id */}
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={
+            <Suspense fallback={<div>Loading user...</div>}>
+              <User />
+            </Suspense>
+          } />
 
-            {/* user routes */}
-            {/* /users, users/:id */}
-            <Route path="/users" element={<Users />} />
-            <Route path="/users/:id" element={<User />} />
+          {/* tanstack routes */}
+          <Route path="/tanstack" element={<Tanstack />} />
+          <Route path="/swr" element={<SWRPage />} />
 
-            {/* tanstack routes */}
-            <Route path="/tanstack" element={<Tanstack />} />
-            <Route path="/swr" element={<SWRPage />} />
+          {/* error boundary test route */}
+          <Route path="/error-test" element={<ErrorTestPage />} />
 
-            {/* lazy loading routes */}
-            <Route path="/lazy" element={<Lazy />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+          {/* lazy loading routes */}
+          <Route path="/lazy" element={
+            <Suspense fallback={<div>Loading lazy component...</div>}>
+              <Lazy />
+            </Suspense>
+          } />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </ErrorBoundary>
     </>
   )
