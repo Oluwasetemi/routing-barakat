@@ -45,3 +45,41 @@
   color: #646cff;
   text-decoration: underline;
 }
+
+:root {
+  --radio-default-color: #646cff;
+  --radio-unchecked-color: #888;
+  --radio-checked-color: #646cff;
+}
+
+input[type="radio"] {
+  /* Default accent color for checked state */
+  accent-color: var(--radio-checked-color);
+
+  /* Custom styling for unchecked state */
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--radio-unchecked-color);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="radio"]:checked {
+  border-color: var(--radio-checked-color);
+  background-color: var(--radio-checked-color);
+}
+
+input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+}

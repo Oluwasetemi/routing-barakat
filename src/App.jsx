@@ -8,6 +8,7 @@ import Home from './pages/home'
 import Tanstack from './pages/tanstack'
 import SWRPage from './pages/swr'
 import ErrorTestPage from './pages/error-test'
+import GitHubPage from './pages/github'
 import usePost from './hooks/usePost'
 
 // Fake async operation to make Suspense show for longer
@@ -110,6 +111,7 @@ function App() {
           <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/lazy">Lazy</NavLink>{` `}
           <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/tanstack">Tanstack</NavLink>{` `}
           <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/swr">SWR</NavLink>{` `}
+          <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/github">GitHub</NavLink>{` `}
           <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/error-test">Error Test</NavLink>{` `}
         </nav>
 
@@ -131,6 +133,7 @@ function App() {
           {/* tanstack routes */}
           <Route path="/tanstack" element={<Tanstack />} />
           <Route path="/swr" element={<SWRPage />} />
+          <Route path="/github" element={<GitHubPage />} />
 
           {/* error boundary test route */}
           <Route path="/error-test" element={<ErrorTestPage />} />
