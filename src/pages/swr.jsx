@@ -1,4 +1,4 @@
-import SWRComponent from '../components/swr.jsx'
+import SWRComponent from '../components/fetch-swr.jsx'
 
 function SWRPage() {
   return <div>
