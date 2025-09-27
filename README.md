@@ -2,6 +2,11 @@
 
 A comprehensive React application demonstrating modern data fetching techniques, routing, error handling, and performance optimization patterns. This project showcases best practices for building robust React applications with proper error boundaries, lazy loading, and multiple data fetching strategies.
 
+## Hosting
+
+Vercel - https://routing-barakat.vercel.app/
+Netlify - https://routing-barakat.netlify.app/
+
 ## 🚀 Features
 
 ### Data Fetching Libraries
