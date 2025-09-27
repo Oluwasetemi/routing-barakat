@@ -1,8 +1,8 @@
 import { useState, useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
-import useGitHubUser from '../hooks/useGitHubUser'
-import useGitHubUserTanStack from '../hooks/useGitHubUserTanStack'
-import GitHubUserCard from '../components/github-user-card'
+import useGitHubUser from '../hooks/useGitHubUser.jsx'
+import useGitHubUserTanStack from '../hooks/useGitHubUserTanStack.jsx'
+import GitHubUserCard from '../components/github-user-card.jsx'
 
 /**
  * Action handler for GitHub user operations (search/clear)

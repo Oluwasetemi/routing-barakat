@@ -4,20 +4,20 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 // setup routes
 import { Routes, Route, Link, NavLink, useParams } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
-import Home from './pages/home'
-import Tanstack from './pages/tanstack'
-import SWRPage from './pages/swr'
-import ErrorTestPage from './pages/error-test'
-import GitHubPage from './pages/github'
-import usePost from './hooks/usePost'
+import Home from './pages/home.jsx'
+import Tanstack from './pages/tanstack.jsx'
+import SWRPage from './pages/swr.jsx'
+import ErrorTestPage from './pages/error-test.jsx'
+import GitHubPage from './pages/github.jsx'
+import usePost from './hooks/usePost.jsx'
 
 // Fake async operation to make Suspense show for longer
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 const Lazy = lazy(() =>
-  delay(3000).then(() => import('./components/lazy'))
+  delay(3000).then(() => import('./components/lazy.jsx'))
 )
-const User = lazy(() => import('./components/user'))
+const User = lazy(() => import('./components/user.jsx'))
 
 // Route-level error fallback component
 function RouteErrorFallback({ error, resetErrorBoundary }) {

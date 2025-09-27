@@ -1,4 +1,4 @@
-import TanstackQuery from '../components/tanstack-query'
+import TanstackQuery from '../components/tanstack-query.jsx'
 
 function Tanstack() {
   return <div>
