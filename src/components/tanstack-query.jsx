@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
+import { Link } from 'react-router-dom'
 
 // TanstackQuery error fallback component
 function TanstackQueryErrorFallback({ error, resetErrorBoundary }) {
@@ -78,7 +79,9 @@ function TanstackQuery() {
         <h1>Posts</h1>
         {data.map((post) => (
           <div key={post.id}>
-            <h2>{`${post.id} - ${post.title}`}</h2>
+            <Link to={`/posts/${post.id}`}>
+              <h2>{`${post.id} - ${post.title}`}</h2>
+            </Link>
             <p>{post.body}</p>
           </div>
         ))}

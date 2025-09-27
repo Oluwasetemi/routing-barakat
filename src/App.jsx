@@ -8,6 +8,7 @@ import Home from './pages/home'
 import Tanstack from './pages/tanstack'
 import SWRPage from './pages/swr'
 import ErrorTestPage from './pages/error-test'
+import usePost from './hooks/usePost'
 
 // Fake async operation to make Suspense show for longer
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -164,11 +165,17 @@ function Posts() {
 function Post() {
   const params = useParams()
   const { id } = params
+  const { post, isLoading, isError } = usePost(id)
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error: {isError.message}</div>
 
   return (
     <main>
       <NavLink className={({ isActive }) => isActive ? 'active' : ''} exact to="/posts">Back to Posts</NavLink>
       <div>Post {id}</div>
+      <h2>{post.title}</h2>
+      <p>{post.body}</p>
     </main>
   )
 }

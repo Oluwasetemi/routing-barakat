@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 import { ErrorBoundary } from 'react-error-boundary'
+import { Link } from 'react-router-dom'
 
 // SWR error fallback component
 function SWRErrorFallback({ error, resetErrorBoundary }) {
@@ -69,7 +70,9 @@ function SWRComponent() {
         <h1>Posts</h1>
         {data.map((post) => (
           <div key={post.id}>
-            <h2>{`${post.id} - ${post.title}`}</h2>
+            <Link to={`/posts/${post.id}`}>
+              <h2>{`${post.id} - ${post.title}`}</h2>
+            </Link>
             <p>{post.body}</p>
           </div>
         ))}
