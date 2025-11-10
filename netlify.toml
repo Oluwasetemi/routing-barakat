@@ -1,0 +1,16 @@
+[build]
+publish = "dist"
+command = "bun install && bun run build"
+
+[build.environment]
+BUN_VERSION = "1.1.30"
+
+[[redirects]]
+from = "/.well-known/*"
+to = "/.well-known/:splat"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
