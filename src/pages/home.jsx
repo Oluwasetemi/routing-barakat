@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Rocket, BookOpen, RefreshCw, Route, Shield, Zap, Target, Fish, Compass, FileText, Users, FlaskConical } from 'lucide-react'
 
 function Home() {
   const containerStyle = {
@@ -67,8 +68,8 @@ function Home() {
     <div style={containerStyle}>
       {/* Header */}
       <div style={headerStyle}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '10px', fontWeight: 'bold' }}>
-          🚀 React Data Fetching & Routing Demo
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '10px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+          <Rocket size={40} /> React Data Fetching & Routing Demo
         </h1>
         <p style={{ fontSize: '1.2rem', opacity: '0.9', maxWidth: '600px', margin: '0 auto' }}>
            Modern React patterns: data fetching, routing, error handling, and performance optimization based on class teaching by @oluwasetemi
@@ -77,13 +78,13 @@ function Home() {
 
       {/* Learning Objectives */}
       <div style={sectionStyle}>
-        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem' }}>
-          📚 Major Learning Points
+        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <BookOpen size={28} /> Major Learning Points
         </h2>
 
         <div style={cardStyle}>
-          <h3 style={{ color: '#3b82f6', marginBottom: '15px' }}>
-            🔄 Modern Data Fetching Patterns
+          <h3 style={{ color: '#3b82f6', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <RefreshCw size={20} /> Modern Data Fetching Patterns
           </h3>
           <ul style={{ marginLeft: '20px', color: '#475569' }}>
             <li><span style={highlightStyle}>TanStack Query</span> - Powerful data synchronization with caching, background updates, and optimistic updates</li>
@@ -98,8 +99,8 @@ function Home() {
         </div>
 
         <div style={cardStyle}>
-          <h3 style={{ color: '#3b82f6', marginBottom: '15px' }}>
-            🛣️ React Router Best Practices
+          <h3 style={{ color: '#3b82f6', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Route size={20} /> React Router Best Practices
           </h3>
           <ul style={{ marginLeft: '20px', color: '#475569' }}>
             <li><span style={highlightStyle}>Dynamic Routing</span> - URL parameters and nested routes for complex navigation</li>
@@ -114,8 +115,8 @@ function Home() {
         </div>
 
         <div style={cardStyle}>
-          <h3 style={{ color: '#3b82f6', marginBottom: '15px' }}>
-            🛡️ Error Boundary Implementation
+          <h3 style={{ color: '#3b82f6', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Shield size={20} /> Error Boundary Implementation
           </h3>
           <ul style={{ marginLeft: '20px', color: '#475569' }}>
             <li><span style={highlightStyle}>What Errors Are Caught</span> - React component render errors and lifecycle errors</li>
@@ -129,8 +130,8 @@ function Home() {
         </div>
 
         <div style={cardStyle}>
-          <h3 style={{ color: '#3b82f6', marginBottom: '15px' }}>
-            ⚡ Performance Optimization
+          <h3 style={{ color: '#3b82f6', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Zap size={20} /> Performance Optimization
           </h3>
           <ul style={{ marginLeft: '20px', color: '#475569' }}>
             <li><span style={highlightStyle}>Code Splitting</span> - <code style={codeStyle}>React.lazy()</code> for dynamic imports</li>
@@ -146,34 +147,42 @@ function Home() {
 
       {/* Key Concepts */}
       <div style={sectionStyle}>
-        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem' }}>
-          🎯 Key Concepts Demonstrated
+        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Target size={28} /> Key Concepts Demonstrated
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
           <div style={cardStyle}>
-            <h4 style={{ color: '#059669', marginBottom: '10px' }}>🔄 Data Synchronization</h4>
+            <h4 style={{ color: '#059669', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <RefreshCw size={18} /> Data Synchronization
+            </h4>
             <p style={{ color: '#475569', fontSize: '14px' }}>
               Learn how modern data fetching libraries handle caching, background updates, and optimistic updates automatically.
             </p>
           </div>
 
           <div style={cardStyle}>
-            <h4 style={{ color: '#059669', marginBottom: '10px' }}>🎣 Custom Hooks</h4>
+            <h4 style={{ color: '#059669', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Fish size={18} /> Custom Hooks
+            </h4>
             <p style={{ color: '#475569', fontSize: '14px' }}>
               Extract reusable logic into custom hooks that encapsulate data fetching, state management, and error handling.
             </p>
           </div>
 
           <div style={cardStyle}>
-            <h4 style={{ color: '#059669', marginBottom: '10px' }}>🛡️ Error Resilience</h4>
+            <h4 style={{ color: '#059669', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Shield size={18} /> Error Resilience
+            </h4>
             <p style={{ color: '#475569', fontSize: '14px' }}>
               Build applications that gracefully handle failures with proper error boundaries and recovery mechanisms.
             </p>
           </div>
 
           <div style={cardStyle}>
-            <h4 style={{ color: '#059669', marginBottom: '10px' }}>⚡ Bundle Optimization</h4>
+            <h4 style={{ color: '#059669', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Zap size={18} /> Bundle Optimization
+            </h4>
             <p style={{ color: '#475569', fontSize: '14px' }}>
               Implement code splitting and lazy loading to create faster, more efficient React applications.
             </p>
@@ -183,8 +192,8 @@ function Home() {
 
       {/* Quick Start */}
       <div style={sectionStyle}>
-        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem' }}>
-          🚀 Quick Start Guide
+        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Rocket size={28} /> Quick Start Guide
         </h2>
 
         <div style={{ backgroundColor: '#1e293b', color: 'white', padding: '20px', borderRadius: '8px', fontFamily: 'monospace' }}>
@@ -202,17 +211,29 @@ function Home() {
 
       {/* Navigation */}
       <div style={sectionStyle}>
-        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem' }}>
-          🧭 Explore the Demo
+        <h2 style={{ color: '#1e293b', marginBottom: '25px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Compass size={28} /> Explore the Demo
         </h2>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-          <Link to="/posts" style={linkStyle}>📝 Posts & Dynamic Routing</Link>
-          <Link to="/users" style={linkStyle}>👥 Users & Lazy Loading</Link>
-          <Link to="/tanstack" style={linkStyle}>🔄 TanStack Query</Link>
-          <Link to="/swr" style={linkStyle}>⚡ SWR Data Fetching</Link>
-          <Link to="/lazy" style={linkStyle}>🚀 Lazy Loading Demo</Link>
-          <Link to="/error-test" style={linkStyle}>🧪 Error Boundary Testing</Link>
+          <Link to="/posts" style={{...linkStyle, display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <FileText size={16} /> Posts & Dynamic Routing
+          </Link>
+          <Link to="/users" style={{...linkStyle, display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <Users size={16} /> Users & Lazy Loading
+          </Link>
+          <Link to="/tanstack" style={{...linkStyle, display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <RefreshCw size={16} /> TanStack Query
+          </Link>
+          <Link to="/swr" style={{...linkStyle, display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <Zap size={16} /> SWR Data Fetching
+          </Link>
+          <Link to="/lazy" style={{...linkStyle, display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <Rocket size={16} /> Lazy Loading Demo
+          </Link>
+          <Link to="/error-test" style={{...linkStyle, display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <FlaskConical size={16} /> Error Boundary Testing
+          </Link>
         </div>
       </div>
     </div>

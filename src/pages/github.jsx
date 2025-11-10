@@ -1,5 +1,6 @@
 import { useState, useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
+import { Search, AlertTriangle } from 'lucide-react'
 import useGitHubUser from '../hooks/useGitHubUser.jsx'
 import useGitHubUserTanStack from '../hooks/useGitHubUserTanStack.jsx'
 import GitHubUserCard from '../components/github-user-card.jsx'
@@ -151,9 +152,13 @@ function GitHubPage() {
         marginBottom: '30px',
         color: '#ffc600',
         fontSize: '2.5rem',
-        fontWeight: '700'
+        fontWeight: '700',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '12px'
       }}>
-        🔍 GitHub User Lookup
+        <Search size={40} /> GitHub User Lookup
       </h1>
 
       {/* Search Form */}
@@ -281,9 +286,12 @@ function GitHubPage() {
             <p style={{
               margin: 0,
               fontSize: '14px',
-              color: '#dc2626'
+              color: '#dc2626',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
             }}>
-              ⚠️ {error}
+              <AlertTriangle size={16} /> {error}
             </p>
           </div>
         )}

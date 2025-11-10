@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, useEffect, lazy, Suspense } from 'react'
+import { AlertTriangle } from 'lucide-react'
 
 // setup routes
 import { Routes, Route, Link, NavLink, useParams } from 'react-router-dom'
@@ -33,8 +34,8 @@ function RouteErrorFallback({ error, resetErrorBoundary }) {
         margin: '20px auto'
       }}
     >
-      <h3 style={{ color: '#dc2626', marginBottom: '15px' }}>
-        ⚠️ Page Error
+      <h3 style={{ color: '#dc2626', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <AlertTriangle size={24} /> Page Error
       </h3>
       <p style={{ marginBottom: '15px', color: '#6b7280' }}>
         This page encountered an error and couldn't load properly.

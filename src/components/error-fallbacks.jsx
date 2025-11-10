@@ -1,3 +1,5 @@
+import { AlertOctagon } from 'lucide-react'
+
 // Root-level error fallback component
 export function RootErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -12,8 +14,8 @@ export function RootErrorFallback({ error, resetErrorBoundary }) {
         marginTop: '100px'
       }}
     >
-      <h2 style={{ color: '#dc2626', marginBottom: '20px' }}>
-        🚨 Application Error
+      <h2 style={{ color: '#dc2626', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+        <AlertOctagon size={32} /> Application Error
       </h2>
       <p style={{ marginBottom: '20px', color: '#6b7280' }}>
         Something went wrong with the application. Please try refreshing the page.

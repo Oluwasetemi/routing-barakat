@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Link } from 'react-router-dom'
+import { XCircle } from 'lucide-react'
 
 // TanstackQuery error fallback component
 function TanstackQueryErrorFallback({ error, resetErrorBoundary }) {
@@ -15,8 +16,8 @@ function TanstackQueryErrorFallback({ error, resetErrorBoundary }) {
         textAlign: 'center'
       }}
     >
-      <h3 style={{ color: '#dc2626', marginBottom: '15px' }}>
-        🔴 Failed to Load Posts (Tanstack Query)
+      <h3 style={{ color: '#dc2626', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <XCircle size={24} /> Failed to Load Posts (Tanstack Query)
       </h3>
       <p style={{ marginBottom: '15px', color: '#6b7280' }}>
         There was an error loading the posts data.

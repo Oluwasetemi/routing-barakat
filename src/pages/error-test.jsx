@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FlaskConical, AlertTriangle } from 'lucide-react'
 
 /**
  * Component that throws an error when rendered
@@ -156,8 +157,8 @@ function ErrorTestPage() {
 
   return (
     <div style={containerStyle}>
-      <h1 style={{ color: '#fcc600', marginBottom: '30px' }}>
-        🧪 Error Boundary Test Page
+      <h1 style={{ color: '#fcc600', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <FlaskConical size={32} /> Error Boundary Test Page
       </h1>
 
       <p style={{ color: '#6b7280', marginBottom: '30px' }}>
@@ -243,8 +244,8 @@ function ErrorTestPage() {
         border: '1px solid #f59e0b',
         borderRadius: '8px'
       }}>
-        <h3 style={{ color: '#92400e', marginBottom: '10px' }}>
-          ⚠️ Important Notes:
+        <h3 style={{ color: '#92400e', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <AlertTriangle size={20} /> Important Notes:
         </h3>
         <ul style={{ color: '#92400e', marginLeft: '20px' }}>
           <li>Error Boundaries only catch errors in React components during rendering</li>

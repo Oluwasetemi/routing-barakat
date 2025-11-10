@@ -1,6 +1,7 @@
 import useSWR from 'swr'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Link } from 'react-router-dom'
+import { XCircle } from 'lucide-react'
 
 // SWR error fallback component
 function SWRErrorFallback({ error, resetErrorBoundary }) {
@@ -15,8 +16,8 @@ function SWRErrorFallback({ error, resetErrorBoundary }) {
         textAlign: 'center'
       }}
     >
-      <h3 style={{ color: '#dc2626', marginBottom: '15px' }}>
-        🔴 Failed to Load Posts (SWR)
+      <h3 style={{ color: '#dc2626', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <XCircle size={24} /> Failed to Load Posts (SWR)
       </h3>
       <p style={{ marginBottom: '15px', color: '#6b7280' }}>
         There was an error loading the posts data using SWR.

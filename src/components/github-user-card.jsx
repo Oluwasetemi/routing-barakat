@@ -1,3 +1,5 @@
+import { AlertTriangle, MapPin, Building2, Globe, Calendar } from 'lucide-react'
+
 /**
  * GitHub User Card Component
  * Displays user information in a clean card format
@@ -58,8 +60,8 @@ function GitHubUserCard({ user, isLoading, isError, error }) {
         maxWidth: '400px',
         margin: '20px auto'
       }}>
-        <h3 style={{ color: '#dc2626', marginBottom: '10px' }}>
-          ⚠️ Error Loading User
+        <h3 style={{ color: '#dc2626', marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <AlertTriangle size={20} /> Error Loading User
         </h3>
         <p style={{ color: '#6b7280', marginBottom: '10px' }}>
           {error?.response?.status === 404
@@ -182,18 +184,18 @@ function GitHubUserCard({ user, isLoading, isError, error }) {
         {/* Additional Info */}
         <div style={{ fontSize: '12px', color: '#656d76' }}>
           {user.location && (
-            <div style={{ marginBottom: '4px' }}>
-              📍 {user.location}
+            <div style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              <MapPin size={14} /> {user.location}
             </div>
           )}
           {user.company && (
-            <div style={{ marginBottom: '4px' }}>
-              🏢 {user.company}
+            <div style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              <Building2 size={14} /> {user.company}
             </div>
           )}
           {user.blog && (
-            <div style={{ marginBottom: '4px' }}>
-              🌐 <a
+            <div style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              <Globe size={14} /> <a
                 href={user.blog.startsWith('http') ? user.blog : `https://${user.blog}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -203,8 +205,8 @@ function GitHubUserCard({ user, isLoading, isError, error }) {
               </a>
             </div>
           )}
-          <div>
-            📅 Joined {new Date(user.created_at).toLocaleDateString()}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+            <Calendar size={14} /> Joined {new Date(user.created_at).toLocaleDateString()}
           </div>
         </div>
 

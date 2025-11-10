@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
+import { XCircle } from 'lucide-react'
 
 // Lazy component error fallback
 function LazyErrorFallback({ error, resetErrorBoundary }) {
@@ -14,8 +15,8 @@ function LazyErrorFallback({ error, resetErrorBoundary }) {
         textAlign: 'center'
       }}
     >
-      <h3 style={{ color: '#dc2626', marginBottom: '15px' }}>
-        🔴 Failed to Load Lazy Component
+      <h3 style={{ color: '#dc2626', marginBottom: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <XCircle size={24} /> Failed to Load Lazy Component
       </h3>
       <p style={{ marginBottom: '15px', color: '#6b7280' }}>
         There was an error loading the lazy component.
